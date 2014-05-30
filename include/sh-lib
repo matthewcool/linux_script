@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function check_root() {
+    if [ $UID -eq 0 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function error_msg() {
+    local msg=$1
+    test -z "$msg" && msg="Unknown error"
+    echo "ERROR: $msg" >&2
+    exit 1
+}
