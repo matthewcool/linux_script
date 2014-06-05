@@ -19,8 +19,8 @@ do
         echo "The user '$user_name' already exists!"
         exit 1
     else
-        #default password is "password" for users
-        passwd=$(perl -e 'print crypt("password", "password")')
+        #default password is user's name
+        passwd=$(perl -e 'print crypt($ARGV[0], "password")' $user_name)
         useradd -m -p $passwd $user_name -s /bin/bash
         [ $? -eq 0 ] && echo "The user '$user_name' has been added to system!" || echo "Failed to add the user '$user_name' to system!"
     fi
